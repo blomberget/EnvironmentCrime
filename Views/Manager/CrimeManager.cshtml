@@ -1,0 +1,32 @@
+﻿@model Employee
+
+@{ Layout = "_ManagerLayout"; }
+
+<h2>Detaljer för ärendet</h2>
+<p class="info">Du är inloggad som avdelningschef</p>
+
+<!--Anropa vykomponenten ErrandInfo och skickar med id till dess metod.-->
+@await Component.InvokeAsync("ErrandInfo", ViewBag.ID)
+
+<section id="bottomColumn">
+    <h3>Redigera ärende</h3>
+    <form asp-controller="Manager" asp-action="ManagerUpdateInvestigator" method="post">
+        <p>
+            Ange handläggare:
+            @*SelectList visar vilken lista som ska hämtas från kontrollern, och visar upp namn från denne, men sparar Id:et för vald anställd .*@
+            <select asp-for="EmployeeId" asp-items="@(new SelectList(ViewBag.ListofEmployees, "EmployeeId", "EmployeeName" ))">
+                <option selected="selected">Välj handläggare</option>
+            </select>
+        </p>
+
+        <p>
+            <input type="checkbox" name="noAction" value="true" />
+            Ingen åtgärd:
+            <input type="text" name="reason" value="Ange motivering" />
+        </p>
+        <p>
+            <input class="button" type="submit" value="Spara" />
+        </p>
+    </form>
+</section>
+

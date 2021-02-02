@@ -1,0 +1,68 @@
+﻿@model ICrimeRepository
+
+@{ Layout = "_ManagerLayout"; }
+
+<h2>Ärenden</h2>
+<p class="info">Du är inloggad som avdelningschef</p>
+
+<table id="managerForm">
+    <tr>
+        <td class="label">Välj status:</td>
+        <td class="label">Välj handläggare:</td>
+        <td>&nbsp;</td>
+        <td class="label">Ärendenummer:</td>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>
+            <select name="status">
+            <!--Hämtar ut samtliga ärendestatusar som finns i databasen, och lägger till dem som alternativ man kan välja i listan.-->
+                <option selected="selected">Välj alla</option>
+                @foreach (ErrandStatus es in Model.ErrandStatuses)
+                {
+    <option value=stat>@es.StatusName</option>
+}
+            </select>
+        </td>
+        <td>
+            <select name="investigator">
+                <option selected="selected">Välj alla</option>
+
+                <!--Metod som hämtar ut den inloggades avdelning. Visar sedan upp samtliga i listan.-->
+                @foreach (Employee emp in Model.GetEmployee())
+                {
+                   <option value=stat>@emp.EmployeeName</option>
+                }
+
+            </select>
+        </td>
+        <td><input class="button" type="submit" value="Hämta lista" /></td>
+        <td><input name="casenumber" /></td>
+        <td><input class="button" type="submit" value="Sök" /></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Ärende anmält</th>
+        <th>Ärendenummer</th>
+        <th>Miljöbrott</th>
+        <th>Status</th>
+        <th>Avdelning</th>
+        <th>Handläggare</th>
+    </tr>
+
+    <!--Anropar model och metod i repository för hämta rätt ärenden som tillhör den inloggade-->
+
+    @foreach (MyErrand errand in Model.GetManagerErrand())
+    {
+<tr>
+    <td>@errand.DateOfObservation </td>
+    <td><a asp-controller="Manager" asp-action="CrimeManager" asp-route-id="@errand.ErrandId">@errand.RefNumber</a></td>
+    <td>@errand.TypeOfCrime </td>
+    <td>@errand.StatusName </td>
+    <td>@errand.DepartmentName </td>
+    <td>@errand.EmployeeName</td>
+</tr>}
+</table>
+

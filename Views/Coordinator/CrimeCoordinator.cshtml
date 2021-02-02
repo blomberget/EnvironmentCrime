@@ -1,0 +1,25 @@
+﻿@model Department
+
+@{
+    Layout = "_CoordinatorLayout";
+}
+
+<h2>Detaljer för ärendet</h2>
+<p class="info">Du är inloggad som samordnare</p>
+
+<!--Anropa vykomponenten ErrandInfo och skickar med id till dess metod.-->
+@await Component.InvokeAsync("ErrandInfo", ViewBag.ID)
+
+<section id="bottomColumn">
+    <h3>Redigera ärende</h3>
+    <form asp-controller="Coordinator" asp-action="CoordinatorUpdateDepartment" method="post">
+        <p>
+            Ange enhet:
+            @*SelectList visar vilken lista som ska hämtas från kontrollern, och visar upp namn från denne, men sparar Id:et för vald anställd .*@
+            <select asp-for="DepartmentId" asp-items="@(new SelectList(ViewBag.ListofDepartments, "DepartmentId", "DepartmentName"))">
+                <option selected="selected">Välj avdelning</option>
+            </select>
+        </p>
+        <p><input class="button" type="submit" value="Spara" /></p>
+    </form>
+</section>

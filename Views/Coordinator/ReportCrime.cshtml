@@ -1,0 +1,12 @@
+﻿@{
+    Layout = "_CoordinatorLayout";
+}
+
+<h2>Rapportera brott</h2>
+<p class="info">Du är inloggad som samordnare</p>
+
+<p>Fyll i formuläret nedan, alla rutor markerade med stjärna (*) måste fyllas i</p>
+<form method="post" asp-controller="Coordinator" asp-action="Validate">
+<!--Hänvisar till vykomponenten för anmälningsformuläret-->
+    @await Component.InvokeAsync("ReportForm")
+</form>

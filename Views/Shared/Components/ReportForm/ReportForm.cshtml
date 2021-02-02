@@ -1,0 +1,37 @@
+﻿@model Errand
+
+<p>
+    <input type="hidden" name="isSubmitted" value="true" />
+</p>
+<p>
+    <label class="label" asp-for="Place"></label><br />
+    <input asp-for="Place" /> *
+    <span asp-validation-for="Place"></span>
+</p>
+<p>
+    <label class="label" asp-for="TypeOfCrime"></label><br />
+    <input asp-for="TypeOfCrime" /> *
+    <span asp-validation-for="TypeOfCrime"></span>
+</p>
+<p>
+    <label class="label" asp-for="DateOfObservation"></label><br />
+    <input asp-for="DateOfObservation" /> *
+    <span asp-validation-for="DateOfObservation"></span>
+</p>
+<p>
+    <label class="label" asp-for="InformerName"></label><br />
+    <input asp-for="InformerName" /> *
+    <span asp-validation-for="InformerName"></span>
+</p>
+<p>
+    <label class="label" asp-for="InformerPhone"></label><br />
+    <input asp-for="InformerPhone" /> *
+    <span asp-validation-for="InformerPhone"></span>
+</p>
+<p>
+    <label class="label" asp-for="Observation"></label><br />
+    <textarea name="observation" rows="5" cols="16"></textarea>
+</p>
+<p>
+    <input class="button" type="submit" value="Skicka in" />
+</p>
